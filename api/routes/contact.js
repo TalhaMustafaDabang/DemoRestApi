@@ -5,9 +5,11 @@ const mongoose = require('mongoose');
 const authMiddleWare = require('../middlewares/checkauth');
 
 router.get('/', authMiddleWare, (req, res, next) => {
+    let trace = " trace: contact get ";
     Contact.find()
         .exec()
         .then((docs) => {
+            trace =+ " .then((docs) => { ";
             const response = {
                 count: docs.length,
                 contacts: docs.map(doc => {
@@ -21,7 +23,8 @@ router.get('/', authMiddleWare, (req, res, next) => {
             res.status(200).json(response);
         })
         .catch(e => {
-            console.log(err);
+            trace += " .catch(e => { ";
+            console.log(err, trace);
             res.status(500).json({
                 error: err
             });
@@ -29,6 +32,7 @@ router.get('/', authMiddleWare, (req, res, next) => {
 });
 
 router.post('/', authMiddleWare, (req, res, next) => {
+    let trace  = " trace : contact post ";
     const contact = new Contact({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
@@ -37,6 +41,7 @@ router.post('/', authMiddleWare, (req, res, next) => {
     });
     contact.save()
         .then(result => {
+            trace += " .then(result => { ";
             res.status(200).json({
                 message: 'Contact Created Successfully!',
                 createdContact: {
@@ -48,7 +53,8 @@ router.post('/', authMiddleWare, (req, res, next) => {
             })
         })
         .catch(e => {
-            console.log(err);
+            trace += " .catch(e => { ";
+            console.log(err,trace);
             res.status(500).json({
             error: err
             });
@@ -56,6 +62,7 @@ router.post('/', authMiddleWare, (req, res, next) => {
 });
 
 router.patch('/:contactId', authMiddleWare, (req, res, next) => {
+    let trace = " trace : contact patch ";
     const id = req.params.productId;
     const updateOps = {};
     for (const ops of req.body){
@@ -64,13 +71,15 @@ router.patch('/:contactId', authMiddleWare, (req, res, next) => {
     Contact.update({_id:id},{$set:updateOps})
     .exec()
     .then(result => {
+    trace += " .then(result => { ";
       res.status(200).json({
           message: 'Contact updated',
           updatedContact : result,
       });
     })
     .catch(err => {
-      console.log(err);
+    trace += " .catch(err => { ";
+      console.log(err, trace);
       res.status(500).json({
         error: err
       });
@@ -78,16 +87,19 @@ router.patch('/:contactId', authMiddleWare, (req, res, next) => {
 });
 
 router.delete('/:contactId', authMiddleWare, (req, res, next) => {
-    const id = req.params.contactId;
+  let trace = " trace : contact delete ";
+  const id = req.params.contactId;
   Product.remove({ _id: id })
     .exec()
     .then(result => {
+    trace += " .then(result => { ";
       res.status(200).json({
           message: 'Contact deleted',
       });
     })
     .catch(err => {
-      console.log(err);
+        trace += " .catch(err => { ";
+        console.log(err, trace);
       res.status(500).json({
         error: err
       });
