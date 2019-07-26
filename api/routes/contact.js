@@ -4,6 +4,12 @@ const Contact = require('../models/contact');
 const mongoose = require('mongoose');
 const authMiddleWare = require('../middlewares/checkauth');
 
+
+router.get('/test',(req,res,next)=>{
+    console.log("hitted")
+   return res.json({message:'done'});
+});
+
 router.get('/', authMiddleWare, (req, res, next) => {
     let trace = " trace: contact get ";
     Contact.find()
@@ -24,9 +30,9 @@ router.get('/', authMiddleWare, (req, res, next) => {
         })
         .catch(e => {
             trace += " .catch(e => { ";
-            console.log(err, trace);
+            console.log(e, trace);
             res.status(500).json({
-                error: err
+                error: e
             });
         })
 });
@@ -64,10 +70,15 @@ router.post('/', authMiddleWare, (req, res, next) => {
 router.patch('/:contactId', authMiddleWare, (req, res, next) => {
     let trace = " trace : contact patch ";
     const id = req.params.productId;
-    const updateOps = {};
-    for (const ops of req.body){
-        updateOps[ops.propName] = ops. value
-    }
+    const updateOps = {
+        name : req.body.name,
+        email  : req.body.email,
+        phone : req.body.phone, 
+        _id : id
+    };
+    // for (const ops of req.body){
+    //     updateOps[ops.propName] = ops.value
+    // }
     Contact.update({_id:id},{$set:updateOps})
     .exec()
     .then(result => {
@@ -89,7 +100,7 @@ router.patch('/:contactId', authMiddleWare, (req, res, next) => {
 router.delete('/:contactId', authMiddleWare, (req, res, next) => {
   let trace = " trace : contact delete ";
   const id = req.params.contactId;
-  Product.remove({ _id: id })
+  Contact.remove({ _id: id })
     .exec()
     .then(result => {
     trace += " .then(result => { ";
