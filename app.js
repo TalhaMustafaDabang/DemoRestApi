@@ -6,7 +6,18 @@ const users = require('./api/routes/users');
 const mongoose = require('mongoose');
 const contact = require('./api/routes/contact');
 const incident = require('./api/routes/incident');
-
+const cors = require('cors');
+var whitelist = ['http://localhost4200/*', 'http://example2.com']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+app.use(cors(corsOptions));
 const dotenv = require('dotenv');
 dotenv.config();
 try{
