@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const authMiddleWare = require('../middlewares/checkauth');
 
 
+
 router.get('/test',(req,res,next)=>{
     console.log("hitted")
    return res.json({message:'done'});

@@ -36,10 +36,11 @@ router.post('/',(req,res,next)=>{
     });
 
     incident.save().then(result=>{
-        return res(result);
+         res.status(200).json({'result':result});
     })
     .catch(e=>{
-        return rej(e);
+        console.log(e)
+         rej(e);
     })
     
 })
