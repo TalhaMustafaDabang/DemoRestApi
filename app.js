@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const contact = require('./api/routes/contact');
 const incident = require('./api/routes/incident');
 const cors = require('cors');
-var whitelist = ['http://localhost4200/*', 'http://example2.com']
+var whitelist = ['http://localhost4200/*', '*']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -17,7 +17,7 @@ var corsOptions = {
     }
   }
 }
-app.use(cors(corsOptions));
+app.use(cors({origin: '*'}));
 const dotenv = require('dotenv');
 dotenv.config();
 try{
