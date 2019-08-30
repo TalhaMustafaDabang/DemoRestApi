@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const users = require('./api/routes/users');
 const mongoose = require('mongoose');
 const contact = require('./api/routes/contact');
+const incident = require('./api/routes/incident');
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -25,22 +26,24 @@ app.use(bodyParser.json());
 
 
 
-
+app.use('/incident',incident)
 app.use('/users',users);
 app.use('/contact',contact);
 
 
 
 
-
+// let error;
 app.use((req,res,next)=>{
-    const error = new Error('Not Found');
-    error.status(404);
-    next(error);
+    // error = new Error("Not Found");
+    // error['message']("Not Found");
+    // const error = new Error('Not Found');
+    // error.status(404);
+    next();
 })
 
 app.use((error,req,res,next)=>{
-   return res.status(error.stauts || 500)
+   return res.status(error.status || 500)
     .json({
         error: {
             message: error.message

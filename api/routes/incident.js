@@ -4,6 +4,7 @@ const mongoose  = require('mongoose');
 const Incident  = require('../models/incident');
 
 
+
 router.post('/',(req,res,next)=>{
     const incident = new Incident({
         _id: new mongoose.Type.ObjectId(),
@@ -42,3 +43,11 @@ router.post('/',(req,res,next)=>{
     })
     
 })
+
+router.get('/',(req,res,next)=>{
+    return res.send({done:"done"});
+})
+
+
+
+module.exports = router;
