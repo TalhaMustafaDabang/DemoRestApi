@@ -6,7 +6,11 @@ const users = require('./api/routes/users');
 const mongoose = require('mongoose');
 const contact = require('./api/routes/contact');
 
+const dotenv = require('dotenv');
+dotenv.config();
+try{
 mongoose.connect("mongodb+srv://talha:"+process.env.MONGO_ATLAS_PASS+"@cluster0-g7n2k.mongodb.net/test?retryWrites=true&w=majority",{ useNewUrlParser: true });
+}catch(e){console.log(e)}
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());

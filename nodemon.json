@@ -1,6 +1,6 @@
 {
     "env":{
-        "MONGO_ATLAS_PASS": "123456asdf",
+        "MONGO_ATLAS_PASS": "ctm-db-haider",
         "JWT_KEY": "secret"
     }
 }
