@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
-const incidentSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+const incidentSchema = new mongoose.Schema({
+    // _id: {type:mongoose.Schema.Types.ObjectId},
+    _id: String,
     member: String,
     brands: String,
     incidentParentId: String,
@@ -19,8 +20,10 @@ const incidentSchema = mongoose.Schema({
     baiting: Boolean,
     suggestedCOA: String,
     actualCOA: String,
-    feedbackProvidedByMember: Boolean,
-    memberRequestedCourseOfAction: Boolean,
+    feedbackProvidedByMember: String,
+    memberRequestedCourseOfAction: String,
+    // feedbackProvidedByMember: Boolean,
+    // memberRequestedCourseOfAction: Boolean,
     memberFeedbackProvidedBy: String,
     memberFeedbackProvidedAt: Date,
     memberFeedbackRemarks: String,

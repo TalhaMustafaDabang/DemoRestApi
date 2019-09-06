@@ -45,22 +45,22 @@ app.use('/contact',contact);
 
 
 // let error;
-app.use((req,res,next)=>{
-    // error = new Error("Not Found");
-    // error['message']("Not Found");
-    // const error = new Error('Not Found');
-    // error.status(404);
-    next();
-})
+// app.use((req,res,next)=>{
+//     // error = new Error("Not Found");
+//     // error['message']("Not Found");
+//     // const error = new Error('Not Found');
+//     // error.status(404);
+//     next();
+// })
 
-app.use((error,req,res,next)=>{
-   return res.status(error.status || 500)
-    .json({
-        error: {
-            message: error.message
-        }
-    });
-})
+// app.use((error,req,res,next)=>{
+//    return res.status(error.status || 500)
+//     .json({
+//         error: {
+//             message: error.message
+//         }
+//     });
+// })
 
 
 module.exports = app;
