@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const users = require('./api/routes/users');
+const company = require('./api/routes/company');
 const mongoose = require('mongoose');
 const contact = require('./api/routes/contact');
 const incident = require('./api/routes/incident');
@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 
 
 app.use('/incident',incident)
-app.use('/users',users);
+app.use('/company',company);
 app.use('/contact',contact);
 
 
